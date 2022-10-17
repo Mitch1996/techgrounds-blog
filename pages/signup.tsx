@@ -12,11 +12,25 @@ const Signup = () => {
     geslacht: '',
   })
 
+
+  const ValidateEmail = (email : String) => {
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(data.email))
+     {
+       return (true)
+     }
+       alert("You have entered an invalid email address!")
+       return (false)
+   }
+
   const handleSignup = async (e: any) => {
     e.preventDefault()
-
     try {
-      await signup(data.email, data.password)
+      if(ValidateEmail(data.email) == true) {
+        await signup(data.email, data.password)
+        alert("Account created")
+      } else {
+        alert("Wrong email")
+      }
     } catch (err) {
       console.log(err)
     }
