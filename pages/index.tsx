@@ -1,14 +1,34 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import Head from "next/head";
+import NoteOperations from "../components/NoteOperations";
+import NoteDetails from "../components/NoteDetails";
+import { useState } from "react";
+import { NextPage } from "next";
 
 const Home: NextPage = () => {
+  const [ID, setID] = useState(null);
+  const getSingleNote = (id: any) => {
+    setID(id);
+  };
   return (
-    <div className={styles.container}>
-      <h1>Techgrounds BLOG</h1>
-    </div>
-  )
-}
+    <div>
+      <Head>
+        <title>Evernote Clone</title>
+        <meta name="description" content="This is an Evernote Clone" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
 
-export default Home
+      <main>
+        <div>
+          <div>
+            <NoteOperations getSingleNote={getSingleNote} />
+          </div>
+          <div>
+            <NoteDetails ID={ID} />
+          </div>
+        </div>
+      </main>
+    </div>
+  );
+};
+
+export default Home;
