@@ -1,34 +1,38 @@
-import React from 'react'
-import { Container, Nav, Navbar } from 'react-bootstrap'
-import Link from 'next/link'
-import { useAuth } from '../context/AuthContext'
-import { useRouter } from 'next/router'
+import React from "react";
+import { Container, Nav, Navbar } from "react-bootstrap";
+import Link from "next/link";
+import { useAuth } from "../context/AuthContext";
+import { useRouter } from "next/router";
 
 const NavbarComp = () => {
-  const { user, logout } = useAuth()
-  const router = useRouter()
+  const { user, logout } = useAuth();
+  const router = useRouter();
 
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="dark" variant="dark">
       <Container>
-        <Link href="/" passHref>
-          <Navbar.Brand>Techgrounds - Blog</Navbar.Brand>
-        </Link>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse>
-          <Nav className="justify-content-end">
+        <Navbar.Brand href="/">Techgrounds - Blog</Navbar.Brand>
+        <Navbar.Toggle />
+        <Navbar.Collapse className="justify-content-end">
+          <Nav>
             {user ? (
-              <div>
-                <Nav.Link
-                  onClick={() => {
-                    logout()
-                    router.push('/login')
-                  }}
-                > <Navbar.Text className='justify-content-end'>
-                    Logout : Logged in as { user.email }
-                </Navbar.Text>
-                </Nav.Link>
-              </div>
+              <>
+                <div>
+                  <Nav.Link
+                    className=""
+                    onClick={() => {
+                      logout();
+                      router.push("/login");
+                    }}
+                  >
+                    {" "}
+                    <Navbar.Text>Logout: Logged in as {user.email}</Navbar.Text>
+                  </Nav.Link>
+                </div>
+                <Link href="/dashboard" passHref>
+                  <Nav.Link>Dashboard</Nav.Link>
+                </Link>
+              </>
             ) : (
               <>
                 <Link href="/signup" passHref>
@@ -43,7 +47,7 @@ const NavbarComp = () => {
         </Navbar.Collapse>
       </Container>
     </Navbar>
-  )
-}
+  );
+};
 
-export default NavbarComp
+export default NavbarComp;

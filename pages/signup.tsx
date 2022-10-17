@@ -1,48 +1,47 @@
-import React, { useState } from 'react'
-import { Button, Form } from 'react-bootstrap'
-import { useAuth } from '../context/AuthContext'
+import { useRouter } from "next/router";
+import React, { useState } from "react";
+import { Button, Form } from "react-bootstrap";
+import { useAuth } from "../context/AuthContext";
 
 const Signup = () => {
-  const { user, signup } = useAuth()
-  console.log(user)
+  const { user, signup } = useAuth();
+  const router = useRouter();
+  console.log(user);
   const [data, setData] = useState({
-    email: '',
-    password: '',
-    leeftijd: '',
-    geslacht: '',
-  })
+    email: "",
+    password: "",
+    leeftijd: "",
+    geslacht: "",
+  });
 
-
-  const ValidateEmail = (email : String) => {
-    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(data.email))
-     {
-       return (true)
-     }
-       alert("You have entered an invalid email address!")
-       return (false)
-   }
+  const ValidateEmail = (email: String) => {
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(data.email)) {
+      return true;
+    }
+    alert("You have entered an invalid email address!");
+    return false;
+  };
 
   const handleSignup = async (e: any) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
-      if(ValidateEmail(data.email) == true) {
-        await signup(data.email, data.password)
-        alert("Account created")
+      if (ValidateEmail(data.email) == true) {
+        await signup(data.email, data.password);
+        alert("Account created");
+        router.push("/dashboard");
       } else {
-        alert("Wrong email")
+        alert("Wrong email");
       }
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-
-    console.log(data)
-  }
+  };
 
   return (
     <div
       style={{
-        width: '40%',
-        margin: 'auto',
+        width: "40%",
+        margin: "auto",
       }}
     >
       <h1 className="text-center my-3 ">Signup</h1>
@@ -116,7 +115,7 @@ const Signup = () => {
         </Button>
       </Form>
     </div>
-  )
-}
+  );
+};
 
-export default Signup
+export default Signup;
