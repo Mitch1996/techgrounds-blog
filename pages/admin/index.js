@@ -16,7 +16,6 @@ export default function AdminPostsPage(props) {
     <main>
       <AuthCheck>
         <CreateNewPost />
-
         <PostList />
       </AuthCheck>
     </main>
@@ -59,7 +58,6 @@ function CreateNewPost() {
       .collection("posts")
       .doc(slug);
 
-  
     const data = {
       title,
       slug,
@@ -75,7 +73,6 @@ function CreateNewPost() {
     await ref.set(data);
 
     toast.success("Post created!");
-
 
     router.push(`/admin/${slug}`);
   };

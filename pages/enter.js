@@ -1,4 +1,5 @@
 import { auth, firestore, googleAuthProvider } from "../lib/firebase";
+// import { GithubAuthProvider } from "firebase/auth";
 import { useContext } from "react";
 import { UserContext } from "../lib/context";
 import { useState, useEffect, useCallback } from "react";
@@ -25,12 +26,21 @@ function SignInButton() {
   const signInWithGoogle = async () => {
     await auth.signInWithPopup(googleAuthProvider);
   };
+  // const signInWithGithub = async () => {
+  //   await auth.signInWithPopup(GithubAuthProvider);
+  // };
   return (
-    <button className="btn-google" onClick={signInWithGoogle}>
-      <img src={`/google.png`} /> Sign in with Google
-    </button>
+    <>
+      <button className="btn-google" onClick={signInWithGoogle}>
+        <img src={`/google.png`} /> Sign in with Google
+      </button>
+      {/* <button className="btn-google" onClick={signInWithGithub}>
+        <img src={`/google.png`} /> Sign in with Google
+      </button> */}
+    </>
   );
 }
+
 function SignOutButton() {
   return <button onClick={() => auth.signOut()}>Sign Out</button>;
 }
@@ -81,7 +91,6 @@ function UsernameForm() {
 
     await batch.commit();
   };
-
 
   const checkUsername = useCallback(
     debounce(async (username) => {
