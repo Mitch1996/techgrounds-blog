@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { auth, storage, STATE_CHANGED } from "@lib/firebase";
 import Loader from "./Loader";
+import Image from "next/image";
 
 // Uploads images to Firebase Storage
 export default function ImageUploader() {
@@ -60,7 +61,13 @@ export default function ImageUploader() {
       )}
 
       {downloadURL && (
-        <code className="upload-snippet">{`![alt](${downloadURL})`}</code>
+        <Image
+          className="upload-snipper"
+          height={100}
+          width={100}
+          src={`${downloadURL}.png`}
+        ></Image>
+        // <code className="upload-snippet">{`![alt](${downloadURL})`}</code>
       )}
     </div>
   );
