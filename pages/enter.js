@@ -1,5 +1,11 @@
-import { auth, firestore, googleAuthProvider } from "../lib/firebase";
-// import { GithubAuthProvider } from "firebase/auth";
+import {
+  auth,
+  firestore,
+  GoogleAuthProvider,
+  facebookProvider,
+  twitterProvider,
+  githubProvider,
+} from "../lib/firebase";
 import { useContext } from "react";
 import { UserContext } from "../lib/context";
 import { useState, useEffect, useCallback } from "react";
@@ -24,19 +30,20 @@ export default function EnterPage({}) {
 
 function SignInButton() {
   const signInWithGoogle = async () => {
-    await auth.signInWithPopup(googleAuthProvider);
+    await auth.signInWithPopup(GoogleAuthProvider);
   };
-  // const signInWithGithub = async () => {
-  //   await auth.signInWithPopup(GithubAuthProvider);
-  // };
+  const signInWithGithub = async () => {
+    await auth.signInWithPopup(githubProvider);
+    console.log(githubProvider);
+  };
   return (
     <>
       <button className="btn-google" onClick={signInWithGoogle}>
         <img src={`/google.png`} /> Sign in with Google
       </button>
-      {/* <button className="btn-google" onClick={signInWithGithub}>
-        <img src={`/google.png`} /> Sign in with Google
-      </button> */}
+      <button className="btn-google" onClick={signInWithGithub}>
+        <img src={`/github.png`} /> Sign in with Github
+      </button>
     </>
   );
 }

@@ -63,8 +63,8 @@ export default function ImageUploader() {
       {downloadURL && (
         <Image
           className="upload-snipper"
-          height={100}
-          width={100}
+          height={300}
+          width={300}
           src={`${downloadURL}.png`}
         ></Image>
         // <code className="upload-snippet">{`![alt](${downloadURL})`}</code>
