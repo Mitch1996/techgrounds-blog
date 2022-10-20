@@ -80,6 +80,8 @@ function CreateNewPost() {
   return (
     <form onSubmit={createPost}>
       <input
+        maxLength={50}
+        minLength={3}
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="My Awesome Article!"
